@@ -1,0 +1,94 @@
+/* =========================================================
+   1. CONFIGURAÇÕES DE BASE E ACESSIBILIDADE
+   ========================================================= */
+:root {
+  /* O JS altera o font-size direto na tag <html> (14px a 20px).
+     Usar 'rem' nos textos garante que todo o site escale junto. */
+  font-size: 16px; 
+  
+  --bg-color: #ffffff;
+  --text-color: #222222;
+  --accent-color: #2e7d32;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Classe ativada pela função toggleContrast() */
+body.high-contrast {
+  --bg-color: #000000;
+  --text-color: #ffff00; /* Amarelo sobre preto para alto contraste */
+  --accent-color: #00ffff;
+}
+
+body.high-contrast a,
+body.high-contrast button {
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  background-color: #000000;
+}
+
+/* =========================================================
+   2. MENUS E DROPDOWNS (Mobile, Explorar e Acessibilidade)
+   ========================================================= */
+
+/* Classe usada para esconder o menu de acessibilidade */
+.hidden {
+  display: none !important;
+}
+
+/* Menu Mobile (#nav-links) - ativado com a classe .show */
+@media (max-width: 768px) {
+  #nav-links {
+    display: none;
+    flex-direction: column;
+  }
+
+  #nav-links.show {
+    display: flex;
+  }
+}
+
+/* Dropdown "Explorar" (.nav-more) - ativado com a classe .open */
+.nav-more {
+  position: relative;
+}
+
+.nav-more .dropdown-content { /* Ajuste para a classe interna do seu submenu */
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+.nav-more.open .dropdown-content {
+  display: block;
+}
+
+/* =========================================================
+   3. ANIMAÇÃO DE ROLAGEM (Scroll Reveal)
+   ========================================================= */
+/* Estado inicial dos elementos com classe .reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Classe adicionada pelo JS quando o elemento entra na tela */
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   4. TRANSIÇÃO DO CARROSSEL
+   ========================================================= */
+/* O JS define carouselTransitionDuration como 460ms */
+.carousel-slide { /* Ajuste para a classe da imagem/container do seu carrossel */
+  transition: opacity 460ms ease-in-out, transform 460ms ease-in-out;
+}
