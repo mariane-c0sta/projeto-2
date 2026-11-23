@@ -89,11 +89,11 @@
                 <h2>Imagens de Hawkins</h2>
                 <p>Uma viagem visual pela série que conquistou o mundo</p>
                 
-                <div class="carrossel">
-                    <button class="carrossel-btn esquerdo">←</button>
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="Cena noturna em Hawkins" class="carrossel-img">
-                    <button class="carrossel-btn direito">→</button>
-                </div>
+               <div class="carrossel">
+    <button class="carrossel-btn esquerdo" onclick="imagemAnterior()">←</button>
+    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="Cena noturna em Hawkins" class="carrossel-img">
+    <button class="carrossel-btn direito" onclick="proximaImagem()">→</button>
+</div>
             </div>
         </section>
 
@@ -174,21 +174,48 @@
         </div>
     </footer>
 
-    <script>
-        const curiosidades = [
-            "O nome 'Stranger Things' foi escolhido depois de várias opções, incluindo 'Montauk' — onde a história se passava originalmente.",
-            "Os irmãos Duffer inspiraram-se em filmes dos anos 80, como E.T., Contatos Imediatos e A Coisa.",
-            "Onze foi inspirada em um personagem do livro 'Firestarter' de Stephen King.",
-            "A série é gravada principalmente na Geórgia, EUA — não no estado de Indiana onde se passa a história.",
-            "O visual do Demogorgon foi feito sem usar CGI excessivo — muitos efeitos são práticos."
-        ];
-        let indice = 0;
+   <script>
+    const curiosidades = [
+        "O nome 'Stranger Things' foi escolhido depois de várias opções, incluindo 'Montauk' — onde a história se passava originalmente.",
+        "Os irmãos Duffer inspiraram-se em filmes dos anos 80, como E.T., Contatos Imediatos e A Coisa.",
+        "Onze foi inspirada em um personagem do livro 'Firestarter' de Stephen King.",
+        "A série é gravada principalmente na Geórgia, EUA — não no estado de Indiana onde se passa a história.",
+        "O visual do Demogorgon foi feito sem usar CGI excessivo — muitos efeitos são práticos."
+    ];
+    let indice = 0;
+    
+    function trocarCuriosidade() {
+        indice = (indice + 1) % curiosidades.length;
+        document.getElementById('texto-curiosidade').textContent = curiosidades[indice];
+    }
+
+    // Carrossel
+    let imagemAtual = 0;
+    const imagens = [
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
+        "https://images.unsplash.com/photo-1518709268805-4e9042af917c?w=800",
+        "https://images.unsplash.com/photo-1536440136628-62822c96b408?w=800"
+    ];
+
+    function proximaImagem() {
+        imagemAtual = (imagemAtual + 1) % imagens.length;
+        document.querySelector('.carrossel-img').src = imagens[imagemAtual];
+    }
+
+    function imagemAnterior() {
+        imagemAtual = (imagemAtual - 1 + imagens.length) % imagens.length;
+        document.querySelector('.carrossel-img').src = imagens[imagemAtual];
+    }
+
+    // Conecta os botões ao carregar a página
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnEsq = document.querySelector('.carrossel-btn.esquerdo');
+        const btnDir = document.querySelector('.carrossel-btn.direito');
         
-        function trocarCuriosidade() {
-            indice = (indice + 1) % curiosidades.length;
-            document.getElementById('texto-curiosidade').textContent = curiosidades[indice];
-        }
-    </script>
+        if (btnEsq) btnEsq.onclick = imagemAnterior;
+        if (btnDir) btnDir.onclick = proximaImagem;
+    });
+</script>
 </body>
 </html>
 
