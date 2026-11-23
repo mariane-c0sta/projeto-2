@@ -160,6 +160,13 @@
     </footer>
 
    <script>
+    function rolarParaSecao(id){
+      const secao = document.querySelector(id);
+      if(secao){
+        secao.scrollIntoView({behavir:'smooth'})
+      }
+
+    }
     const curiosidades = [
         "O nome 'Stranger Things' foi escolhido depois de várias opções, incluindo 'Montauk' — onde a história se passava originalmente.",
         "Os irmãos Duffer inspiraram-se em filmes dos anos 80, como E.T., Contatos Imediatos e A Coisa.",
